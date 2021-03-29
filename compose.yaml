@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  
+  # PostgreSQL
+  postgres:
+    image: ewldev/multi-face-detection-postgres
+    container_name: postgres
+    build: ./postgres
+    environment:
+      POSTGRES_USER: sally
+      POSTGRES_PASSWORD: secret
+      POSTGRES_URL: postgres://sally:secret@localhost:5432/smart-brain
+      POSTGRES_DB: smart-brain
+      POSTGRES_HOST: postgres
+    ports:
+      - "5432:5432"    
+
+  # Backend
+  smart-brain-api:
+    image: ewldev/multi-face-detection-backend
+    container_name: backend
+    build: ./
+    # volumes:
+    #   - ./:/usr/src/smart-brain-api
+    command: npm start
+    working_dir: /usr/src/smart-brain-api
+    environment:
+      POSTGRES_URI: postgres://sally:secret@postgres:5432/smart-brain
+    ports:
+      - "3000:3000"
+
+  
