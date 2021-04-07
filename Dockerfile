@@ -1,9 +1,29 @@
-FROM node:14.15.4
+FROM node:14.12.0
 
+# Create app directory
+RUN mkdir -p /usr/src/smart-brain-api
 WORKDIR /usr/src/smart-brain-api
 
-COPY ./ ./
-
+# Install app dependencies
+COPY package.json /usr/src/smart-brain-api
 RUN npm install
 
-CMD ["/bin/bash"]
+# Bundle app source
+COPY . /usr/src/smart-brain-api
+
+# Build arguments
+ARG NODE_VERSION=14.12.0
+
+# Environment
+ENV NODE_VERSION $NODE_VERSION
+
+
+# FROM node:14.15.4
+
+# WORKDIR /usr/src/smart-brain-api
+
+# COPY ./ ./
+
+# RUN npm install
+
+# CMD ["/bin/bash"]

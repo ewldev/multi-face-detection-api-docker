@@ -3,7 +3,7 @@ services:
   
   # PostgreSQL
   postgres:
-    image: ewldev/multi-face-detection-postgres
+    image: ewldev/multiface-detection-postgres
     container_name: postgres
     build: ./postgres
     environment:
@@ -17,7 +17,7 @@ services:
 
   # Backend
   smart-brain-api:
-    image: ewldev/multi-face-detection-backend
+    image: ewldev/multiface-detection-backend
     container_name: backend
     build: ./
     # volumes:
@@ -27,6 +27,4 @@ services:
     environment:
       POSTGRES_URI: postgres://sally:secret@postgres:5432/smart-brain
     ports:
-      - "3000:3000"
-
-  
+      - "3000:3000" 
